@@ -11,17 +11,17 @@ const UserProfilePage = () => {
         className={`fixed inset-y-0 left-0 bg-white p-6 shadow-md transform transition-transform duration-500 ease-in-out z-20 mt-20 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
           } w-64 lg:w-64`}
       >
-        <h2 className="text-2xl font-bold mb-8">User Dashboard</h2>
+        <h2 className="text-2xl font-bold mb-8">User Profile</h2>
         <nav>
           <ul className="space-y-6">
             <li>
               <a href="#" className="text-gray-600 hover:text-blue-600 flex items-center">
-                <span className="mr-3">🏠</span> Home
+                <span className="mr-3">🏠</span> Profile
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-600 hover:text-blue-600 flex items-center">
-                <span className="mr-3">📁</span> My Projects
+              <a href="/user/userinfo" className="text-gray-600 hover:text-blue-600 flex items-center">
+                <span className="mr-3">📁</span> Add info
               </a>
             </li>
             <li>

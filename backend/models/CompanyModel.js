@@ -6,13 +6,17 @@ const CompanySchema = new Schema({
         type: String,
         required: true
     },
-    Industry: {
+    contactEmail: {
+        type: String
+    },
+    password:{type:String, required:true},
+    industry: {
         type: String,
-        required: true
+        // required: true
     },
     companyLocation: {
         type: String,
-        required: true
+        // required: true
     },
     logo: {
         type: String,
@@ -22,9 +26,6 @@ const CompanySchema = new Schema({
         type: String
     },
     description: {
-        type: String
-    },
-    contactEmail: {
         type: String
     },
     createdAt: {

@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import Navbar from '@/app/user/Navbar'
+import Navbar from '@/app/user/components/Navbar'
 
 const Layout = ({children}) => {
   return (

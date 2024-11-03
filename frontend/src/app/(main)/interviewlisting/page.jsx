@@ -87,18 +87,18 @@ const HeaderSection = ({ handleSearch, searchTerm, setSearchTerm, filters, handl
 };
 
 // Interview Listing Card Component
-const InterviewListing = ({ jobTitle, companyName, InterviewDate, Location, endDate, logo }) => {
+const InterviewListing = ({ jobTitle, company, InterviewDate, Location, endDate }) => {
     return (
         <div className="bg-white p-4 border rounded-lg shadow-md flex items-center justify-between space-x-4 hover:shadow-lg transition-shadow">
             {/* Company Logo */}
             <div className="w-28 h-28">
-                <img src={logo} alt={`${companyName} logo`} className="object-contain w-full h-full" />
+                {/* <img src={company.logo} alt={`${company.name} logo`} className="object-contain w-full h-full" /> */}
             </div>
 
             {/* Job Info */}
             <div className="flex-1">
                 <h3 className="text-lg font-semibold">{jobTitle}</h3>
-                <p className="text-gray-600">{companyName}</p>
+                {/* <p className="text-gray-600">{company.name}</p> */}
                 <p className="text-gray-500">
                     Date: <span className="font-medium">{InterviewDate}</span>
                 </p>
@@ -149,6 +149,8 @@ const InterviewListingsContainer = () => {
         try {
             const response = await fetch('http://localhost:5000/interview/getall'); // Backend endpoint for getting companies
             const data = await response.json();
+            console.log(data);
+
             setInterviewlist(data);
             setFilteredListings(data); // Initially, show all companies
         } catch (error) {
@@ -221,11 +223,10 @@ const InterviewListingsContainer = () => {
                         <InterviewListing
                             key={index}
                             jobTitle={listing.jobTitle}
-                            company={listing.companyName}
+                            company={listing.company}
                             date={listing.InterviewDate}
                             location={listing.Location}
                             deadline={listing.endDate}
-                            logo={listing.logo}
                         />
                     ))
                 ) : (

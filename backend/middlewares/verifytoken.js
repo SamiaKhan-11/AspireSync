@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 
 const verifyToken = (req,res,next) => {
   const token = req.headers[ 'x-auth-token' ];
-
+  console.log(token);
+  
   jwt.verify(
     token,
     process.env.JWT_SECRET,
@@ -13,7 +14,7 @@ const verifyToken = (req,res,next) => {
            res.status(500).json(err)
            
         } else {
-              res.user = payload;
+              req.user = payload;
               next();
         }
     }

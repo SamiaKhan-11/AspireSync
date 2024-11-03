@@ -55,9 +55,6 @@ router.get('/getbyemail/:email', (req, res) => {
 });
 
 
-
-
-
 //getbyid
 router.get('/getbyid/:id', (req, res) => {
    Model.findById(req.params.id)

@@ -33,10 +33,10 @@ const SignUp = () => {
     validationSchema: SignupSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
-        await axios.post('http://localhost:5000/user/add', values);
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/add`, values);   //Changes made in frontend env file
         resetForm();
         toast.success('User Registered Successfully!');
-        router.push('/Login');
+        router.push('/login');
       } catch (err) {
         if (err.response?.data.code === 11000) {
           toast.error('Email already exists');
@@ -54,7 +54,7 @@ const SignUp = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="max-w-lg w-full space-y-8 p-8 bg-white dark:bg-neutral-900 rounded-xl shadow-lg"
+        className="max-w-lg w-full space-y-8 p-8 bg-white dark:bg-neutral-900 rounded-md shadow-lg"
       >
         <div className="text-center">
           <h2 className="text-2xl font-bold text-purple-500 dark:text-white">
@@ -148,8 +148,8 @@ const SignUp = () => {
           </div>
           <p className="mt-2 text-sm text-gray-600 dark:text-neutral-400 text-center">
             Already have an account?{' '}
-            <Link href="/signin" className="text-blue-600 dark:text-blue-400 hover:underline">
-              Sign in
+            <Link href="/login" className="text-blue-600 dark:text-blue-400 hover:underline">
+              Login
 
             </Link>
           </p>

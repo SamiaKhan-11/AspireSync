@@ -24,9 +24,12 @@ const Login = () => {
     },
     onSubmit: (values, { setSubmitting }) => {
       // Make API call for login
-      axios.post('http://localhost:5000/companyauth/authenticate', values)
-        .then(() => {
+      axios.post('http://localhost:5000/company/authenticate', values)
+        .then((res) => {
           toast.success('Login Successful');
+          localStorage.setItem('company', JSON.stringify(res.data));
+          localStorage.setItem('token', res.data.token);
+          
           router.push('/'); // Navigate to dashboard after successful login
         })
         .catch((error) => {
@@ -61,7 +64,7 @@ const Login = () => {
 
       </div>
 
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg dark:bg-neutral-900 ">
+      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg shadow-black dark:bg-neutral-900 ">
 
 
 
@@ -130,7 +133,7 @@ const Login = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Don't have an account?{" "}
-              <Link href="/" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+              <Link href="/company-signup" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
                 Sign up
 
               </Link>

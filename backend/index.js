@@ -2,8 +2,8 @@
 const express = require('express');
 const Userrouter = require('./routers/UserRouter');
 const Companyrouter = require('./routers/CompanyRouter');
-const CompanyAuthrouter = require('./routers/CompanyAuthRouter');
 const Interviewrouter = require('./routers/InterviewRouter');
+const Subscriptionrouter = require('./routers/SubscriptionRouter');
 const cors = require('cors');
 
 // Initializing express app
@@ -19,8 +19,8 @@ app.use(express.json());                                                        
 // Routes
 app.use('/user', Userrouter);                                                              // User-related routes
 app.use('/company', Companyrouter);                                                        // Company-related routes
-app.use('/companyauth', CompanyAuthrouter);                                                        // Company-related routes
 app.use('/interview', Interviewrouter);                                                    // Interview-related routes
+app.use('/subscribe', Subscriptionrouter);                                                    // Interview-related routes
 
 // Default route
 app.get('/', (req, res) => {

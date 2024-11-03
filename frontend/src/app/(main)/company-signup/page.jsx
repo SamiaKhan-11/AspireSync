@@ -38,11 +38,11 @@ const CompanySignup = () => {
     },
     onSubmit: (values, { resetForm, setSubmitting }) => {
       // Make API call to register company
-      axios.post('http://localhost:5000/companyauth/add', values)
+      axios.post(`${process.env.NEXT_PUBLIC_API_URL}/company/add`, values)
         .then(() => {
           toast.success('Company Registered Successfully');
           resetForm();
-          router.push('/company/companylogin');
+          router.push('/company-login');
         })
         .catch((error) => {
           console.error(error);
@@ -100,7 +100,7 @@ const CompanySignup = () => {
 
         {/* Right Section - Signup Form */}
         <motion.div 
-          className="flex flex-col bg-white p-8 rounded-lg shadow-md dark:bg-neutral-900" 
+          className="flex flex-col bg-white p-8 rounded-lg shadow-md dark:bg-neutral-900 shadow-md shadow-black" 
           variants={containerVariants} 
           initial="hidden" 
           animate="visible" 
@@ -193,7 +193,7 @@ const CompanySignup = () => {
 
           <p className="text-sm text-center text-gray-600 dark:text-gray-400">
             Already have an account? 
-            <Link href="/login" className="text-blue-600 hover:underline"> Login</Link>
+            <Link href="/company-login" className="text-blue-600 hover:underline"> Login</Link>
           </p>
         </motion.div>
       </div>
