@@ -53,7 +53,7 @@ const UserProfilePage = () => {
 
       {/* Main Content */}
       <main
-        className={`flex-1 p-6 transform transition-transform duration-500 ease-in-out ${isSidebarOpen ? 'sm:ml-64' : ' lg:ml-0 lg:ml-64'
+        className={`flex-1 p-6 -ml-10 transform transition-transform duration-500 ease-in-out ${isSidebarOpen ? 'sm:ml-64' : ' lg:ml-0 lg:ml-64'
           }`}
       >
         {/* Profile Header */}

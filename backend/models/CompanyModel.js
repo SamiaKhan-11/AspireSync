@@ -25,6 +25,10 @@ const CompanySchema = new Schema({
     website: {
         type: String
     },
+    linkToApply : {
+        type: String
+
+    },
     description: {
         type: String
     },

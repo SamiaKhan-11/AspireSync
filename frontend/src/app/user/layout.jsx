@@ -5,7 +5,7 @@ import Navbar from '@/app/user/components/Navbar'
 const Layout = ({children}) => {
   return (
     <div>
-        <Navbar/>
+        {/* <Navbar/> */}
         {children}
         
         </div>

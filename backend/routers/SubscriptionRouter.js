@@ -1,13 +1,16 @@
 const express = require('express')
-const Model = require('../models/SubscriptionModel');
+const SubscriptionModel = require('../models/SubscriptionModel');
+const verifyToken = require('../middlewares/verifytoken');
 const router = express.Router();
+const Model = require('../models/SubscriptionModel');
 
-router.post('/add', async (req, res) => {
-   const { companyId, userId } = req.body;
+router.post('/add', verifyToken, async (req, res) => {
+   const { companyId } = req.body;
+   const { _id } = req.user;
 
    try {
       // Check if the user has already subscribed to the company
-      const existingSubscription = await SubscriptionModel.findOne({ companyId, userId });
+      const existingSubscription = await SubscriptionModel.findOne({ companyId, _id });
 
       if (existingSubscription) {
          return res.status(400).json({ message: 'Already subscribed to this company.' });
@@ -15,9 +18,8 @@ router.post('/add', async (req, res) => {
 
       // Create a new subscription entry in the database
       const newSubscription = new SubscriptionModel({
-         companyId,
-         userId,
-         status: 'active', // default to active
+         company: companyId,
+         user: _id
       });
 
       // Save the subscription
@@ -40,17 +42,18 @@ router.get('/getall', (req, res) => {                  //request method for read
       });
 });
 
-router.get('/getbyuser/:user', (req, res) => {
-   console.log(req.params.city);
+router.get('/getbyuser', verifyToken, async (req, res) => {
+   const { _id } = req.user;
 
-   Model.find({ city: req.params.city })
-      .then((result) => {
-         res.status(200).json(result);
-      }).catch((err) => {
-         console.log(err);
-         res.status(500).json(err);
-      });
+   try {
+      const subscriptions = await SubscriptionModel.find({ user: _id }).populate('company', 'name');
+      res.status(200).json(subscriptions);
+   } catch (error) {
+      console.error('Error fetching subscriptions:', error);
+      res.status(500).json({ message: 'Failed to fetch subscriptions' });
+   }
 });
+
 
 
 router.get('/getbycompany/:company', (req, res) => {
@@ -80,6 +83,32 @@ router.delete('/delete/:id', (req, res) => {
       }).catch((err) => {
          res.status(500).json(err)
       });
+});
+
+router.get('/check-subscription/:companyid', verifyToken, async (req, res) => {
+   const { _id } = req.user;
+   const { companyid } = req.params;
+
+   try {
+      const subscription = await SubscriptionModel.findOne({ company: companyid, user: _id });
+      res.status(200).json({ isSubscribed: !!subscription });
+   } catch (error) {
+      console.error('Error checking subscription:', error);
+      res.status(500).json({ message: 'Failed to check subscription' });
+   }
+});
+
+router.get('/getbycompany', verifyToken, async (req, res) => {
+   const { _id } = req.user;
+   const { companyid } = req.params;
+
+   try {
+      const subscription = await SubscriptionModel.find({ company: req.user._id });
+      res.status(200).json({ isSubscribed: !!subscription });
+   } catch (error) {
+      console.error('Error checking subscription:', error);
+      res.status(500).json({ message: 'Failed to check subscription' });
+   }
 });
 
 module.exports = router;

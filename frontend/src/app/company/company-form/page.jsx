@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import Sidebar from '@/app/company/components/Sidebar';
+import Sidebar from '@/app/company/Sidebar';
 
 
 const CompanyForm = () => {
@@ -38,7 +38,7 @@ const CompanyForm = () => {
     })
       .then((result) => {
         toast.success('Company Information Updated');
-        router.back();
+        router.push('/company/profile');
 
       }).catch((err) => {
         console.log(err);
@@ -129,120 +129,142 @@ const CompanyForm = () => {
 
       {/* Form Section */}
 
-      <div className="bg-gray-100 flex-1 p-3">
+      <div>
+        <main className="bg-[#1D3557] flex-1 p-4">
+          {/* Profile Header */}
+          <div className="bg-white rounded-lg shadow-md space-y-6 p-1 ">
 
-        <h2 className='font-bold text-2xl p-5 m-2 bg-white rounded-md z-40'>Add Company Details</h2>
+            <h1 className="text-4xl font-extrabold text-center text-gray-800 mt-4">
+              Update Company Profile
+            </h1>
+            <p className="text-center text-lg text-gray-500">
+              Get started by filling in your details. Showcase your skills, connect your profiles, and land your dream job!
+            </p>
+            <div className="">
 
-        {
-          companyData !== null ? (
-            <Formik initialValues={companyData} onSubmit={submitForm} >
-              {(updateform) => {
-                return (
-
-                  <form onSubmit={updateform.handleSubmit} >
-
-                    <div className="bg-white shadow-xl grid grid-cols-1 md:grid-cols-3 m-2 rounded-md ">
+              <div className="bg-[#1D3557] shadow-inner shadow-black w-[100%] mx-auto">
 
 
-                      {/* Left Section - Company Logo */}
-                      <div className="bg-white flex flex-col items-center p-8 relative rounded-md">
+                {
+                  companyData !== null ? (
+                    <Formik initialValues={companyData} onSubmit={submitForm}>
+                      {
+                        (updateForm) => {
+                          return (
+                            <form onSubmit={updateForm.handleSubmit} >
 
-                        <div className="flex flex-col items-center mt-20">
-                          <img
-                            src="/profileimage.jpg"
-                            alt=""
-                            className="h-40 w-40 rounded-full object-cover border-8 border-blue-400 shadow-md shadow-black mb-4"
-                          />
-                          <label
-                            htmlFor="logo"
-                            className="text-blue-600 cursor-pointer hover:underline"
-                          >
-                            Change Company Logo
-                          </label>
-                          <input type="file" id="logo"
-                            onChange={uploadToCloud} className="hidden" />
-                        </div>
+                              <div className="bg-white shadow-xl grid grid-cols-1 md:grid-cols-3 ">
 
-                        <div>
-                          <img src="/register.png" alt="" />
-                        </div>
 
-                        <div className="absolute bottom-4 left-4 w-16 h-16 bg-blue-300 rounded-full shadow-lg shadow-gray-400 animate-bounce" />
-                      </div>
+                                {/* Left Section - Company Logo */}
+                                <div className="bg-white flex flex-col items-center p-8 relative rounded-md">
 
-                      {/* Right Section - Form */}
-                      <div className="p-12 col-span-2">
+                                  <div className="flex flex-col items-center mt-20">
+                                    <img
+                                      src={companyData.logo || "/profileimage.jpg"}
+                                      alt=""
+                                      className="h-40 w-40 rounded-full object-cover border-8 border-[#1D3557] shadow-md shadow-black mb-4"
+                                    />
+                                    <label
+                                      htmlFor="logo"
+                                      className="text-[#1D3557] cursor-pointer hover:underline"
+                                    >
+                                      Change Company Logo
+                                    </label>
+                                    <input type="file" id="logo"
+                                      onChange={uploadToCloud} className="hidden" />
+                                  </div>
 
-                        <div className="space-y-8">
+                                  <div>
+                                    <img src="/register.png" alt="" />
+                                  </div>
 
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700">Industry</label>
-                            <input
-                              type="text"
-                              id="industry"
-                              value={updateform.values.industry}
-                              onChange={updateform.handleChange}
-                              className="w-full p-3 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                              placeholder="Enter industry type"
-                              required
-                            />
-                          </div>
+                                  <div className="absolute bottom-4 left-4 w-16 h-16 bg-[#1D3557] rounded-full shadow-lg shadow-gray-400 animate-bounce" />
+                                </div>
 
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700">Company Location</label>
-                            <input
-                              type="text"
-                              id="companyLocation"
-                              value={updateform.values.companyLocation}
-                              onChange={updateform.handleChange}
-                              className="w-full p-3 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                              placeholder="Enter company location"
-                              required
-                            />
-                          </div>
+                                {/* Right Section - Form */}
+                                <div className="p-12 col-span-2">
 
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700">Website</label>
-                            <input
-                              type="url"
-                              id="website"
-                              value={updateform.values.website}
-                              onChange={updateform.handleChange}
-                              className="w-full p-3 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                              placeholder="Enter company website"
-                            />
-                          </div>
+                                  <div className="space-y-8">
 
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700">Description</label>
-                            <textarea
-                              rows={3}
-                              id="description"
-                              value={updateform.values.description}
-                              onChange={updateform.handleChange}
-                              className="w-full p-3 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                              placeholder="Enter a brief company description"
-                            />
-                          </div>
+                                    <div>
+                                      <label className="block text-sm font-medium text-gray-700">Industry</label>
+                                      <input
+                                        type="text"
+                                        id="industry"
+                                        value={updateForm.values.industry}
+                                        onChange={updateForm.handleChange}
+                                        className="w-full p-3 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                        placeholder="Enter industry type"
+                                        required
+                                      />
+                                    </div>
 
-                          <button
-                            type="submit"
-                            disabled={updateform.isSubmitting || !imgUrl}
-                            className="w-full py-3 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600"
-                          >
-                            Register Company
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                )
-              }
-              }
-            </Formik>
-          ) : <div>Loading...</div>
-        }
+                                    <div>
+                                      <label className="block text-sm font-medium text-gray-700">Company Location</label>
+                                      <input
+                                        type="text"
+                                        id="companyLocation"
+                                        value={updateForm.values.companyLocation}
+                                        onChange={updateForm.handleChange}
+                                        className="w-full p-3 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                        placeholder="Enter company location"
+                                        required
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <label className="block text-sm font-medium text-gray-700">Website</label>
+                                      <input
+                                        type="url"
+                                        id="website"
+                                        value={updateForm.values.website}
+                                        onChange={updateForm.handleChange}
+                                        className="w-full p-3 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                        placeholder="Enter company website"
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <label className="block text-sm font-medium text-gray-700">Description</label>
+                                      <textarea
+                                        rows={3}
+                                        id="description"
+                                        value={updateForm.values.description}
+                                        onChange={updateForm.handleChange}
+                                        className="w-full p-3 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                        placeholder="Enter a brief company description"
+                                      />
+                                    </div>
+
+                                    <button
+                                      type="submit"
+                                      disabled={updateForm.isSubmitting}
+                                      className="w-full py-3 bg-[#1D3557] text-white font-bold rounded-md hover:bg-blue-900"
+                                    >
+                                      Register Company
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+
+                          )
+                        }
+                      }
+                    </Formik>
+
+
+
+                  ) : (<div>Loading....</div>)}
+
+
+              </div>
+            </div>
+          </div>
+        </main>
       </div>
+
     </div>
 
   );

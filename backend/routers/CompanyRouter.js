@@ -64,6 +64,17 @@ router.get('/get-detail', verifyToken, (req, res) => {
         });
 });
 
+router.get('/companies', async (req, res) => {
+    try {
+      const companies = await Model.find(); // Replace `CompanyModel` with your model
+      res.status(200).json(companies);
+    } catch (error) {
+      console.error('Error fetching companies:', error);
+      res.status(500).json({ message: 'Failed to fetch companies' });
+    }
+  });
+  
+
 // Update a company by ID
 router.put('/update', verifyToken, (req, res) => {
     Model.findByIdAndUpdate(req.user._id, req.body, { new: true })
@@ -110,7 +121,7 @@ router.post('/authenticate', (req, res) => {
                 jwt.sign(
                     payload,
                     process.env.JWT_SECRET,
-                    { expiresIn: '1hr' },
+                    { expiresIn: '10hr' },
                     (err, token) => {
                         if (err) {
                             console.log(err);

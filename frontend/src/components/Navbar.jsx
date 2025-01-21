@@ -9,7 +9,7 @@ export default function Navbar() {
             <div className="container mx-auto flex justify-between items-center ">
                 {/* Logo */}
                 <Link href="/" className="text-black text-3xl font-bold mx-28">
-                    OffCampus
+                    AspireSync
                 </Link>
 
                 {/* Mobile Menu Button */}
@@ -45,7 +45,7 @@ export default function Navbar() {
                     hover:bg-blue-200">
                         About
                     </Link>
-                    <Link href="/interviews" className="text-black hover:text-blue-500 px-3  py-2 rounded-lg transition duration-300 font-semibold 
+                    <Link href="/interviewlisting" className="text-black hover:text-blue-500 px-3  py-2 rounded-lg transition duration-300 font-semibold 
                     hover:bg-blue-200">
                         Interviews
                     </Link>

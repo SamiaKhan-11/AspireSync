@@ -61,25 +61,25 @@ const CompanySignup = () => {
 
   return (
     <div 
-      className="min-h-screen flex items-center bg-gradient-to-tr from-purple-400 to-blue-400 dark:from-blue-950 dark:via-transparent">
+      className="min-h-screen flex items-center bg-[#1D3557] dark:from-blue-950 dark:via-transparent">
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto grid items-center md:grid-cols-2 gap-8 lg:gap-12">
         
         {/* Left Section - Content */}
         <motion.div variants={containerVariants} initial="hidden" animate="visible" transition={{ duration: 0.5 }}>
-          <p className="inline-block text-sm font-bold text-black dark:from-blue-400 dark:to-violet-400 bg-clip-text bg-gradient-to-l from-blue-800 to-violet-800 text-transparent">
-            Off Campus Interview
+          <p className="inline-block text-lg font-bold text-black dark:from-blue-400 dark:to-violet-400 bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300 text-transparent animate-bounce">
+          AspireSync
           </p>
           <div className="mt-4 md:mb-12 max-w-2xl">
-            <h1 className="mb-4 font-semibold text-black text-4xl lg:text-5xl dark:text-neutral-200">
+            <h1 className="mb-4 font-semibold text-white text-4xl lg:text-5xl dark:text-neutral-200">
               Get started today and find the perfect match for your company’s needs.
             </h1>
-            <p className="text-black font-medium dark:text-neutral-400">
+            <p className="text-gray-100 font-medium dark:text-neutral-400">
               Post job openings, interview schedules, and internship opportunities directly on our platform to streamline your hiring process.
             </p>
           </div>
           <blockquote className="hidden md:block relative max-w-sm">
             <svg
-              className="absolute top-0 start-0 transform -translate-x-6 -translate-y-8 size-16 text-gray-600 dark:text-neutral-800 -ml-8"
+              className="absolute top-0 start-0 transform -translate-x-6 -translate-y-8 size-16 text-gray-300 dark:text-neutral-800 -ml-8"
               width={16}
               height={16}
               viewBox="0 0 16 16"
@@ -92,7 +92,7 @@ const CompanySignup = () => {
                 fill="currentColor"
               />
             </svg>
-            <p className="text-xl italic text-black dark:text-white">
+            <p className="text-xl italic text-white dark:text-white">
               Get direct access to a wide range of candidates actively seeking off-campus opportunities.
             </p>
           </blockquote>
@@ -107,7 +107,7 @@ const CompanySignup = () => {
           transition={{ duration: 0.5 }}
         >
           <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold text-gray-700 mb-4 bg-clip-text bg-gradient-to-tr from-purple-600 to-blue-500 text-transparent w-fit mx-auto">
+            <h1 className="text-3xl font-bold text-gray-700 mb-4 bg-clip-text bg-[#1D3557] text-transparent w-fit mx-auto">
               Company Signup
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-300">
@@ -184,7 +184,7 @@ const CompanySignup = () => {
               <button
                 type="submit"
                 disabled={signupForm.isSubmitting}
-                className="w-full py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+                className="w-full py-2 bg-[#1D3557] text-white font-semibold rounded-md hover:bg-[#06357d] focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
               >
                 Signup
               </button>

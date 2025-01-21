@@ -1,6 +1,7 @@
 const express = require('express');
 const Model = require('../models/UserModel');
 const jwt = require('jsonwebtoken');
+const verifyToken = require('../middlewares/verifytoken');
 require('dotenv').config();
 
 const router = express.Router();
@@ -54,6 +55,22 @@ router.get('/getbyemail/:email', (req, res) => {
       });
 });
 
+router.get('/get-detail', verifyToken, (req, res) => {
+   Model.findById(req.user._id)
+
+       .then((result) => {
+           if (result) {
+               res.status(200).json(result);
+           } else {
+               res.status(404).json({ message: "User not found" });
+           }
+       })
+       .catch((err) => {
+           console.log(err);
+           res.status(500).json({ message: "Error fetching user data", error: err });
+       });
+});
+
 
 //getbyid
 router.get('/getbyid/:id', (req, res) => {
@@ -66,17 +83,33 @@ router.get('/getbyid/:id', (req, res) => {
       });
 });
 
-
-//update
-router.put('/update/:id', (req, res) => {                    //request method for update -> put 
-   Model.findByIdAndUpdate(req.params.id, req.body, { new: true })
+router.get('/getbyid', (req, res) => {
+   Model.findById(req.user.id)
       .then((result) => {
          res.status(200).json(result);
       }).catch((err) => {
          console.log(err);
          res.status(500).json(err);
       });
-})
+});
+
+
+//update
+router.put('/update', verifyToken, (req, res) => {
+   Model.findByIdAndUpdate(req.user._id, req.body, { new: true })
+
+       .then((result) => {
+           if (result) {
+               res.status(200).json(result);
+           } else {
+               res.status(404).json({ message: "User not found" });
+           }
+       })
+       .catch((err) => {
+           console.log(err);
+           res.status(500).json({ message: "Error updating User info", error: err });
+       });
+});
 //delete
 router.delete('/delete/:id', (req, res) => {
    Model.findByIdAndDelete(req.params.id)
@@ -101,7 +134,7 @@ router.post('/authenticate', (req, res) => {
             jwt.sign(
                payload,
                process.env.JWT_SECRET,
-               { expiresIn: '1hr' },
+               { expiresIn: '10hr' },
                (err, token) => {
                   if (err) {
                      console.log(err);

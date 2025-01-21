@@ -1,10 +1,8 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react'
 import Pagination from '@/components/Pagination'
-import { motion } from 'framer-motion';
 
 
-// Header Section with Search Bar and Filters
 const HeaderSection = ({ handleSearch, searchTerm, setSearchTerm, filters, handleFilterChange }) => {
     return (
         <header className="bg-gray-100 p-4 rounded-lg shadow-lg">
@@ -87,53 +85,13 @@ const HeaderSection = ({ handleSearch, searchTerm, setSearchTerm, filters, handl
 };
 
 
-
-// Interview Listing Card Component
-const InterviewListing = ({ jobTitle, company, location, interviewDate, endDate  }) => {
-    return (
-        <div className="bg-white p-4 border rounded-lg shadow-md flex items-center justify-between space-x-4 hover:shadow-lg transition-shadow">
-            <div div className="w-28 h-28" >
-                <img src={company.logo} alt={company.name} className="object-contain w-full h-full" />
-            </div>
-
-
-            <div className="flex-1">
-                <h3 className="text-lg font-semibold">{jobTitle}</h3>
-                <p className="text-gray-500">
-                    Company: <span className="font-medium">{company.companyName}</span>
-                </p>
-                <p className="text-gray-500">
-                    Location : <span className="font-medium">{location}</span>
-                </p>
-                <p className="text-gray-500">
-                    InterviewDate: <span className="font-medium">{interviewDate}</span>
-                </p>
-                <p className="text-gray-500">
-                    Application Deadline: <span className="font-medium">{endDate}</span>
-                </p>
-            </div>
-
-
-            <div className="flex space-x-2">
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                    Apply Now
-                </button>
-                <button className="border border-blue-600 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white transition-colors">
-                    Visit Website
-                </button>
-            </div>
-        </div >
-    );
-};
-
-// Main Container for the Interview Listings
-const InterviewListingsContainer = () => {
+const InterviewList = () => {
 
     const [Interviewlist, setInterviewlist] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filters, setFilters] = useState({
         jobTitle: '',
-        Location: '',
+        location: '',
         Industry: '',
         Experience: '',
     });
@@ -142,7 +100,6 @@ const InterviewListingsContainer = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const listingsPerPage = 5; // Set number of listings per page
-
 
     // fetching data from backend
     const fetchInterviewData = async () => {
@@ -161,7 +118,6 @@ const InterviewListingsContainer = () => {
     useEffect(() => {
         fetchInterviewData(); // Fetch companies from backend when the component mounts
     }, []);
-
 
     // Update filters state
     const handleFilterChange = (e) => {
@@ -202,9 +158,6 @@ const InterviewListingsContainer = () => {
     const totalPages = Math.ceil(filteredListings.length / listingsPerPage);
     const startIndex = (currentPage - 1) * listingsPerPage;
     const currentListings = filteredListings.slice(startIndex, startIndex + listingsPerPage);
-
-
-
     return (
         <div className="p-8">
             {/* Header Section */}
@@ -220,13 +173,26 @@ const InterviewListingsContainer = () => {
             <div className="mt-6 space-y-4">
                 {filteredListings.length > 0 ? (
                     filteredListings.map((listing) => (
-                        <InterviewListing
-                            jobTitle={listing.jobTitle}
-                            company={listing.company}
-                            date={listing.InterviewDate}
-                            location={listing.Location}
-                            deadline={listing.endDate}
-                        />
+                        <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transform transition duration-500 ease-in-out">
+                            <div className="p-6 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+                                <div className="relative flex-shrink-0">
+                                    <img
+                                        src={`${listing.profileImage}`}
+                                        alt={`${listing.company} logo`}
+                                        className="w-24 h-24 object-cover rounded-full"
+                                    />
+                                </div>
+                                <div className="flex flex-col items-center md:items-start space-y-2">
+                                    <h2 className="text-xl font-semibold">{listing.jobTitle}</h2>
+                                    <p className="text-gray-600">{listing.company.companyName}</p>
+                                    <p className="text-gray-600">{listing.location}</p>
+                                    <p className="text-gray-600">{listing.jobType}</p>
+                                    <p className="text-gray-600">{listing.experience}</p>
+                                    <p className="text-gray-600">{listing.skillsRequired}</p>
+                                    <p className="text-gray-600">{listing.interviewDate}</p>
+                                </div>
+                            </div>
+                        </div>
                     ))
                 ) : (
                     <p>No listings found</p>
@@ -240,9 +206,8 @@ const InterviewListingsContainer = () => {
                 setPage={setCurrentPage}
             />
 
-
         </div>
-    );
-};
+    )
+}
 
-export default InterviewListingsContainer;
+export default InterviewList

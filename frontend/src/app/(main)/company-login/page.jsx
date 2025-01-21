@@ -30,7 +30,7 @@ const Login = () => {
           localStorage.setItem('company', JSON.stringify(res.data));
           localStorage.setItem('token', res.data.token);
           
-          router.push('/'); // Navigate to dashboard after successful login
+          router.push('/company/profile'); // Navigate to dashboard after successful login
         })
         .catch((error) => {
           console.error(error);
@@ -42,21 +42,20 @@ const Login = () => {
   });
 
   return (
-    <div className="min-h-screen flex gap-40 items-center justify-center bg-gradient-to-tr from-purple-400 to-blue-400 dark:from-blue-950 dark:to-black">
+    <div className="min-h-screen flex gap-40 items-center justify-center bg-[#1D3557] dark:from-blue-950 dark:to-black">
 
 
       <div>
-        <p className="inline-block text-sm font-bold text-black dark:from-blue-400 dark:to-violet-400 bg-clip-text bg-gradient-to-l from-blue-800 to-violet-800 text-transparent">
-          Off Campus Interview
+        <p className="inline-block text-lg font-bold text-black dark:from-blue-400 dark:to-violet-400 bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300 text-transparent animate-bounce">
+          AspireSync
         </p>
         <div className="mt-4 md:mb-12 max-w-2xl">
-          <h1 className="mb-4 font-semibold text-black text-4xl lg:text-5xl dark:text-neutral-200">
+          <h1 className="mb-6 font-semibold text-white text-4xl lg:text-5xl dark:text-neutral-200">
             Welcome Back!
             <br />
             Please login back to access your account
-
           </h1>
-          <p className="text-black font-medium dark:text-neutral-400">
+          <p className="text-gray-200 font-medium dark:text-neutral-400 ">
 
             Post job openings, interview schedules, and internship opportunities directly on our platform to streamline your hiring process.
           </p>
@@ -75,7 +74,7 @@ const Login = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          <h2 className="text-center text-3xl font-bold text-gray-700 mb-6 bg-clip-text bg-gradient-to-r from-blue-600 to-purple-500 text-transparent">
+          <h2 className="text-center text-3xl font-bold text-gray-700 mb-6 bg-clip-text bg-[#1D3557] text-transparent">
             Company Login
           </h2>
 
@@ -123,8 +122,10 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={loginForm.isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-500 text-white font-semibold py-2 rounded-md shadow-sm hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-colors duration-200"
+                className="w-full bg-[#1D3557] text-white font-semibold py-2 rounded-md shadow-sm hover:bg-[#073982] focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-colors duration-200"
+                href="/company/profile"
               >
+              
                 {loginForm.isSubmitting ? 'Logging in...' : 'Log in'}
               </button>
             </div>

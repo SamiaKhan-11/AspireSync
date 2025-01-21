@@ -14,6 +14,10 @@ const mySchema = new Schema({
         type: String,
         required: true,
       },
+      profileImage: {
+        type: String, // Store the image URL or path
+        default: 'https://example.com/default-profile.png',
+      },
       contactNumber: {
         type: String,
         // required: true,
@@ -42,10 +46,7 @@ const mySchema = new Schema({
         type: Number, // Years of experience
         default: 0,
       },
-      profileImage: {
-        type: String, // Store the image URL or path
-        default: 'https://example.com/default-profile.png',
-      },
+     
       bio: {
         type: String,
         maxlength: 500, // Optional short bio

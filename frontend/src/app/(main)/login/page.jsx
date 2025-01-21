@@ -21,33 +21,34 @@ const Login = () => {
             password: '',
         },
         validationSchema: LoginSchema,
-        onSubmit: (values) => {
-            console.log(values);
-
+        onSubmit: (values, { setSubmitting }) => {
+            // Make API call for login
             axios.post('http://localhost:5000/user/authenticate', values)
-                .then((response) => {
-                    toast.success('Login Successfully')
-                    router.push('/')
-
-                }).catch((err) => {
-                    console.log(err);
-                    toast.error(err.response.data.message)
-
-                });
-
-        },
+              .then((res) => {
+                toast.success('Login Successful');
+                localStorage.setItem('user', JSON.stringify(res.data));
+                localStorage.setItem('token', res.data.token);
+                
+                router.push('/user/profile'); // Navigate to dashboard after successful login
+              })
+              .catch((error) => {
+                console.error(error);
+                toast.error('Invalid login credentials');
+                setSubmitting(false);
+              });
+          },
     });
 
     return (
-        <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-400 to-blue-400 dark:bg-gradient-to-br dark:from-neutral-900 dark:via-gray-800">
+        <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-[#1D3557] to-[#1a61c7] dark:bg-gradient-to-br dark:from-neutral-900 dark:via-gray-800">
             <motion.div
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
-                className="max-w-lg w-full space-y-8 p-8 bg-white dark:bg-neutral-900 rounded-xl shadow-lg"
+                className="max-w-lg w-full space-y-8 p-8 bg-white dark:bg-neutral-900 shadow-black shadow-inner"
             >
                 <div className="text-center">
-                    <h2 className="text-2xl font-bold text-purple-500 dark:text-white">Welcome Back!</h2>
+                    <h2 className="text-2xl font-bold text-[#1D3557] dark:text-white">Welcome Back!</h2>
                     <p className="text-gray-600 mt-2">Please log in to your account</p>
                 </div>
 
@@ -96,7 +97,7 @@ const Login = () => {
                             whileTap={{ scale: 0.95 }}
                             type="submit"
                             disabled={loginForm.isSubmitting}
-                            className="w-full flex justify-center py-2 px-4 mt-10 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-purple-500 to-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600"
+                            className="w-full flex justify-center py-2 px-4 mt-10 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#1D3557] hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600"  
                         >
                             {loginForm.isSubmitting ? 'Logging in...' : 'Log In'}
                         </motion.button>

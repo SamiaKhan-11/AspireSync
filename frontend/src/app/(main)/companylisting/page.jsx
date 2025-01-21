@@ -4,6 +4,9 @@ import Pagination from '@/components/Pagination'
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { Router } from 'next/router';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const CompanyListingsPage = () => {
   const [complist, setComplist] = useState([]);
@@ -17,31 +20,34 @@ const CompanyListingsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const listingsPerPage = 6; // Number of companies per page
 
+  const router = useRouter();
 
   const [subscribedCompanies, setSubscribedCompanies] = useState([]); // State to track subscribed companies
+  const token = localStorage.getItem('token');
 
-  const addSubscription = () => {
-    axios.post(`${process.env.NEXT_PUBLIC_API_URL}/subscription/add`, data, {
+  const addSubscription = (companyId) => {
+    axios.post(`${process.env.NEXT_PUBLIC_API_URL}/subscribe/add`, {
+      companyId
+    }, {
       headers: {
         'x-auth-token': token
       }
     })
       .then((result) => {
-        toast.success('Subscribed to the company');
-        router.back();
+        toast.success(result.data.message);
+        // router.push();
 
       }).catch((err) => {
         console.log(err);
-        toast.error('Unable to subscribe to the company');
+        toast.error(err.message);
 
       });
-    } 
-  
+  }
+
 
   // Fetch companies from backend
   const fetchCompanies = async () => {
-    try 
-    {
+    try {
       const response = await fetch('http://localhost:5000/company/getall'); // Backend endpoint for getting companies
       const data = await response.json();
       setComplist(data);
@@ -105,7 +111,7 @@ const CompanyListingsPage = () => {
       <div className="p-6 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
         <div className="relative flex-shrink-0">
           <img
-            src="/Lock2.jpg"
+            src={`${company.logo}`}
             alt={`${company.companyName} logo`}
             className="w-28 h-28 object-cover rounded-full shadow-md border-4 border-blue-500"
           />
@@ -120,21 +126,21 @@ const CompanyListingsPage = () => {
           <p className="text-lg text-gray-400 font-semibold">{company.location}</p>
         </div>
 
-        <div className="mt-4 md:mt-0">
-          <button
-            className="px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        <div className="mt-4 md:mt-0 space-x-4">
+          <Link href={`/company-detail/${company._id}`}
+            className="px-6 py-2 bg-blue-600 text-white text-sm font-medium  shadow-md shadow-black hover:bg-blue-800 transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             onClick={() => {
               setCompanyset(company);
               // Trigger a modal or another detailed view here
             }}
           >
             View Details
-          </button>
+          </Link>
 
           <button
-            onClick={() => handleSubscribe(company._id)}
+            onClick={() => addSubscription(company._id)}
             disabled={subscribedCompanies.includes(company._id)}
-            className={`p-2 text-white ${subscribedCompanies.includes(company._id) ? 'bg-gray-500' : 'bg-blue-500'} rounded mt-2`}
+            className={`px-6 py-2 bg-red-600 text-white text-sm font-medium shadow-md shadow-black hover:bg-red-800 ${subscribedCompanies.includes(company._id) ? 'bg-gray-500' : 'bg-blue-500'} rounded mt-2`}
           >
             {subscribedCompanies.includes(company._id) ? 'Subscribed' : 'Subscribe'}
           </button>
@@ -143,10 +149,6 @@ const CompanyListingsPage = () => {
       </div>
     </div>
   );
-
-
-
-
 
   return (
     <div className="p-8 bg-gray-100 min-h-screen">

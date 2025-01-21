@@ -2,6 +2,7 @@ const { Schema, model, Types } = require('../connection');
 
 const MySchema = new Schema({
     company: { type: Types.ObjectId, required: true, ref: 'companies' },
+    profileImage : { type: Types.ObjectId, required: false, ref: 'companies' },
     jobTitle: { type: String },
     jobType: { type: String, required: true, },
     experience: { type: String, required: true },

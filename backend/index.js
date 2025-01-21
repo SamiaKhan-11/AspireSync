@@ -4,6 +4,8 @@ const Userrouter = require('./routers/UserRouter');
 const Companyrouter = require('./routers/CompanyRouter');
 const Interviewrouter = require('./routers/InterviewRouter');
 const Subscriptionrouter = require('./routers/SubscriptionRouter');
+const Reviewrouter = require('./routers/ReviewRouter');
+const GenerateOTP = require('./routers/utilRouter');
 const cors = require('cors');
 
 // Initializing express app
@@ -21,7 +23,9 @@ app.use('/user', Userrouter);                                                   
 app.use('/company', Companyrouter);                                                        // Company-related routes
 app.use('/interview', Interviewrouter);                                                    // Interview-related routes
 app.use('/subscribe', Subscriptionrouter);                                                    // Interview-related routes
-
+app.use('/review', Reviewrouter);                                                    // Interview-related routes
+app.use('/utilRouter', GenerateOTP);                                                    // Interview-related routes
+ 
 // Default route
 app.get('/', (req, res) => {
     res.send('Welcome to the Off Campus Interview API');

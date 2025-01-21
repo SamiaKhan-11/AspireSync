@@ -49,22 +49,22 @@ const SignUp = () => {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-400 to-blue-400 dark:bg-gradient-to-br dark:from-neutral-900 dark:via-gray-800">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#1D3557] dark:bg-gradient-to-br dark:from-neutral-900 dark:via-gray-800">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="max-w-lg w-full space-y-8 p-8 bg-white dark:bg-neutral-900 rounded-md shadow-lg"
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="max-w-lg w-full space-y-8 p-8 bg-white dark:bg-neutral-900 rounded-sm shadow-lg shadow-black"
       >
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-purple-500 dark:text-white">
+          <h2 className="text-2xl font-bold text-[#1D3557] dark:text-white">
             Create an account
           </h2>
           <p className="text-gray-600 mt-2">Join us and start exploring!</p>
           
         </div>
 
-        <form onSubmit={signupForm.handleSubmit} className="mt-8 space-y-4">
+        <form onSubmit={signupForm.handleSubmit} className="space-y-3">
           <div className="rounded-md shadow-sm">
             {/* Name Field */}
             <div className="flex flex-col-reverse">
@@ -77,7 +77,7 @@ const SignUp = () => {
                 onChange={signupForm.handleChange}
                 value={signupForm.values.name}
                 placeholder="Enter Name"
-                className="peer relative duration-500 w-full border border-gray-300 rounded-lg p-2 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-200 transition 
+                className="peer relative duration-500 w-full border border-gray-800 rounded-lg p-2 mt-2 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-300 transition 
                 placeholder:duration-500 placeholder:absolute focus:placeholder:pt-10 focus:rounded-md"
 
               />
@@ -123,7 +123,7 @@ const SignUp = () => {
                 onChange={signupForm.handleChange}
                 value={signupForm.values.password}
                 placeholder=" Create a password"
-                className="peer relative duration-500 w-full border border-gray-300 rounded-lg p-2 mt-3 focus:border-purple-600 focus:ring-2 focus:ring-pink-400 transition 
+                className="peer relative duration-500 w-full border border-gray-300 rounded-lg p-2 mt-2 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-200 transition 
                 placeholder:duration-500 placeholder:absolute focus:placeholder:pt-10 focus:rounded-md"
 
               />
@@ -141,7 +141,7 @@ const SignUp = () => {
               whileTap={{ scale: 0.95 }}
               type="submit"
               disabled={signupForm.isSubmitting}
-              className="w-full flex justify-center py-2 px-4 mt-10 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-purple-500 to-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600"
+              className="w-full flex justify-center py-2 px-4 mt-10 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#1D3557] hover:bg-[#06357d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600"
             >
               {signupForm.isSubmitting ? 'Signing up...' : 'Sign up'}
             </motion.button>
