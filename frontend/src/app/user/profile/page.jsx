@@ -8,10 +8,10 @@ const UserProfilePage = () => {
     <div className="min-h-screen bg-gray-100 flex overflow-hidden">
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 bg-white p-6 shadow-md transform transition-transform duration-500 ease-in-out z-20 mt-20 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed inset-y-0 left-0 bg-white p-6 shadow-md transform transition-transform duration-500 ease-in-out z-20 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
           } w-64 lg:w-64`}
       >
-        <h2 className="text-2xl font-bold mb-8">User Profile</h2>
+        <h2 className="text-2xl font-bold mb-8 text-center">User Profile</h2>
         <nav>
           <ul className="space-y-6">
             <li>
@@ -39,21 +39,20 @@ const UserProfilePage = () => {
       </aside>
 
       {/* Toggle Button */}
+      <div className="h-screen bg-white">
       <button
-        className="p-2 absolute top-4 left-4 z-30 bg-white shadow-md text-black rounded-md"
+        className="p-1 absolute top-4 left-4 z-30 bg-white shadow-md text-black rounded-md"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-      ><svg name='first' xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-baseline-density-medium">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M4 20h16" />
-          <path d="M4 12h16" />
-          <path d="M4 4h16" />
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-layout-sidebar-left-expand"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 3a3 3 0 0 1 2.995 2.824l.005 .176v12a3 3 0 0 1 -2.824 2.995l-.176 .005h-12a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-12a3 3 0 0 1 2.824 -2.995l.176 -.005h12zm0 2h-9v14h9a1 1 0 0 0 .993 -.883l.007 -.117v-12a1 1 0 0 0 -.883 -.993l-.117 -.007zm-4.387 4.21l.094 .083l2 2a1 1 0 0 1 .083 1.32l-.083 .094l-2 2a1 1 0 0 1 -1.497 -1.32l.083 -.094l1.292 -1.293l-1.292 -1.293a1 1 0 0 1 -.083 -1.32l.083 -.094a1 1 0 0 1 1.32 -.083z" />
         </svg>
         {isSidebarOpen ? '' : ''}
       </button>
+      </div>
 
       {/* Main Content */}
       <main
-        className={`flex-1 p-6 -ml-10 transform transition-transform duration-500 ease-in-out ${isSidebarOpen ? 'sm:ml-64' : ' lg:ml-0 lg:ml-64'
+        className={`flex-1 p-2 transform translate-x-0 transition-transform duration-500 ease-in-out ${isSidebarOpen ? 'translate-x-64' : ' translate-x-12'
           }`}
       >
         {/* Profile Header */}

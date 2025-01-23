@@ -6,6 +6,7 @@ const Interviewrouter = require('./routers/InterviewRouter');
 const Subscriptionrouter = require('./routers/SubscriptionRouter');
 const Reviewrouter = require('./routers/ReviewRouter');
 const GenerateOTP = require('./routers/utilRouter');
+const resumeRouter = require('./routers/resumeRouter');
 const cors = require('cors');
 
 // Initializing express app
@@ -24,7 +25,8 @@ app.use('/company', Companyrouter);                                             
 app.use('/interview', Interviewrouter);                                                    // Interview-related routes
 app.use('/subscribe', Subscriptionrouter);                                                    // Interview-related routes
 app.use('/review', Reviewrouter);                                                    // Interview-related routes
-app.use('/utilRouter', GenerateOTP);                                                    // Interview-related routes
+app.use('/utilRouter', GenerateOTP);
+app.use('/resume', resumeRouter);                                                    // Interview-related routes
  
 // Default route
 app.get('/', (req, res) => {
